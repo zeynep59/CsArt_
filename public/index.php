@@ -1,5 +1,8 @@
 <?php
 
+define('ROOT', 'http://localhost/csart/public');
+
+
 $url = $_GET['url'] ?? 'home';
 $url = explode("/", $url);
 

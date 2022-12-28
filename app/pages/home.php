@@ -12,7 +12,7 @@
 
 
 
-  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     .bi {
@@ -76,7 +76,7 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="assets/css/headers.css" rel="stylesheet">
+  <link href="<?php echo ROOT?>/assets/css/headers.css" rel="stylesheet">
 </head>
 
 <body>
@@ -120,21 +120,21 @@
 
 
   <!-- Slider-->
-  <link rel="stylesheet" href="assets/slider/ism/css/my-slider.css" />
-  <script src="assets/slider/ism/js/ism-2.2.min.js"></script>
+  <link rel="stylesheet" href="<?php echo ROOT?>/assets/slider/ism/css/my-slider.css" />
+  <script src="<?php echo ROOT?>/assets/slider/ism/js/ism-2.2.min.js"></script>
 
   <div class="ism-slider" id="my-slider">
     <ol>
       <li>
-        <img src="assets/images/a.jpg">
+        <img src="<?php echo ROOT?>/assets/images/a.jpg">
         <div class="assets/slider/ism-caption ism-caption-0">1</div>
       </li>
       <li>
-        <img src="assets/images/b.jpg">
+        <img src="<?php echo ROOT?>/assets/images/b.jpg">
         <div class="ism-caption ism-caption-0">2</div>
       </li>
       <li>
-        <img src="assets/images/c.jpg">
+        <img src="<?php echo ROOT?>/assets/images/c.jpg">
         <div class="ism-caption ism-caption-0">3</div>
       </li>
     </ol>
@@ -159,7 +159,7 @@
             <a href="#" class="stretched-link">Continue reading</a>
           </div>
           <div class="col-lg-auto col-12 d-lg-block">
-            <img class="bd-placeholder-image w-100" width="100" height="250" src="assets/images/3.jpeg">
+            <img class="bd-placeholder-image w-100" width="100" height="250" src="<?php echo ROOT?>/assets/images/3.jpeg">
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
               dy=".3em">Thumbnail</text>
@@ -178,7 +178,7 @@
             <a href="#" class="stretched-link">Continue reading</a>
           </div>
           <div class="col-lg-auto col-12 d-lg-block">
-            <img class="bd-placeholder-image w-100" width="100" height="250" src="assets/images/5.jpeg">
+            <img class="bd-placeholder-image w-100" width="100" height="250" src="<?php echo ROOT?>/assets/images/5.jpeg">
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
               dy=".3em">Thumbnail</text>
@@ -198,7 +198,7 @@
             <a href="#" class="stretched-link">Continue reading</a>
           </div>
           <div class="col-lg-auto col-12 d-lg-block">
-            <img class="bd-placeholder-image w-100" width="100" height="250" src="assets/images/2.jpeg">
+            <img class="bd-placeholder-image w-100" width="100" height="250" src="<?php echo ROOT?>/assets/images/2.jpeg">
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
               dy=".3em">Thumbnail</text>
@@ -217,7 +217,7 @@
             <use xlink:href="#bootstrap" />
           </svg>
         </a>
-        <p class="text-muted">&copy; 2022</p>
+        <p class="text-muted">&copy; <?php echo date("M-Y")?></p>
       </div>
 
       <div class="col mb-3">
@@ -225,10 +225,10 @@
       </div>
 
       <div class="col mb-3">
-        <h5>Section</h5>
+        <h5>USeful Links</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+          <li class="nav-item mb-2"><a href="<?php echo ROOT?>/login" class="nav-link p-0 text-muted">Login</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
@@ -258,7 +258,7 @@
       </div>
     </footer>
   </div>
-  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo ROOT?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

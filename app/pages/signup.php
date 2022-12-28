@@ -11,7 +11,7 @@
 
     
 
-<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -68,7 +68,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="assets/css/sign-in.css" rel="stylesheet">
+    <link href="<?php echo ROOT?>/assets/css/sign-in.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
@@ -93,7 +93,7 @@
       <label for="floatingPassword">Password</label>
     </div>
 
-    <div class="my-2">Already have an account? <a href="login.php"> Login here</a> </div>
+    <div class="my-2">Already have an account? <a href="<?php echo ROOT?>/login"> Login here</a> </div>
 
     <div class="checkbox mb-3">
       <label>
