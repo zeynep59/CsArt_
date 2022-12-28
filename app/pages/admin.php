@@ -1,61 +1,145 @@
+<?php
+
+if(!logged_in()){
+  redirect('login');
+}
+
+$section = $url[1] ?? 'dashboard';
+$action  = $url[2] ?? 'view';
+$id      = $url[3] ?? 0;
+
+
+$filename = "../app/pages/admin/" . $section . ".php";
+if(!file_exists($filename)){
+  require_once "../app/pages/admin/404.php";
+}
+
+if(!empty($_POST)){
+
+  
+//add new
+  if ($action == 'add') {
+ 
+    //validate
+    $errors = [];
+  
+    if(empty($_POST['username'])){
+      $errors['username'] = "A username is required";
+    }
+    else if(preg_match("/^[a-zA-Z]1234567890+$/", $_POST['username'])) {
+  
+      $errors['username'] = "A username can only have letters and no spaces";
+    }
+     if(empty($_POST['password'])){
+      $errors['password'] = "A password is required";
+    }
+    else if(strlen($_POST['password'])<5){
+  
+      $errors['password'] = "Password must be 5 characters or more";
+    }
+    else
+      if($_POST['password'] !== $_POST['retype_password'])
+      {
+        $errors['password'] = "Passwords do not match";
+      }
+  
+     
+    $query = "select id from users where email = :email limit 1";
+      $email = query($query, ['email'=>$_POST['email']]);
+  
+      if(empty($_POST['email']))
+      {
+        $errors['email'] = "A email is required";
+      }else
+      if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
+      {
+        $errors['email'] = "Email not valid";
+      }else
+      if($email)
+      {
+        $errors['email'] = "That email is already in use";
+      }
+  
+  
+    if(empty($errors)){
+  
+      //save to db
+      $data = [];
+      $data['username'] = $_POST['username'];
+      $data['email']    = $_POST['email'];
+      $data['role']     = "user";
+      $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  
+  
+      $query = "insert into users (username, email, password, role) values (:username, :email, :password, :role) ";
+      query($query, $data);
+  
+      redirect('admin/users');
+    } 
+  
+  }
+  
+}
+  
+
+?>
+
+
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">   
+    <meta name="description" content="">
     <title>Admin - CsArt</title>
 
 
-    
-
-    
-
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="<?=ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=ROOT?>/assets/css/bootstrap-icons.css" rel="stylesheet">
 
     <style>
-      .bd-placeholder-img {
+    .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
-      }
+    }
 
-      @media (min-width: 768px) {
+    @media (min-width: 768px) {
         .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+            font-size: 3.5rem;
         }
-      }
+    }
 
-      .b-example-divider {
+    .b-example-divider {
         height: 3rem;
         background-color: rgba(0, 0, 0, .1);
         border: solid rgba(0, 0, 0, .15);
         border-width: 1px 0;
         box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
+    }
 
-      .b-example-vr {
+    .b-example-vr {
         flex-shrink: 0;
         width: 1.5rem;
         height: 100vh;
-      }
+    }
 
-      .bi {
+    .bi {
         vertical-align: -.125em;
         fill: currentColor;
-      }
+    }
 
-      .nav-scroller {
+    .nav-scroller {
         position: relative;
         z-index: 2;
         height: 2.75rem;
         overflow-y: hidden;
-      }
+    }
 
-      .nav-scroller .nav {
+    .nav-scroller .nav {
         display: flex;
         flex-wrap: nowrap;
         padding-bottom: 1rem;
@@ -64,84 +148,113 @@
         text-align: center;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-      }
+    }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
-    <link href="assets/css/dashboard.css" rel="stylesheet">
-  </head>
-  <body>
-    
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">CsArt</a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
-  <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
-    </div>
-  </div>
-</header>
+    <link href="<?=ROOT?>/assets/css/dashboard.css" rel="stylesheet">
+</head>
 
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3 sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-            <i class="bi bi-speedometer">  </i>
-            Dashboard
-            </a>
-          </li>
-          
-        </ul>
+<body>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Others</span>
-          <a class="link-secondary" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle" class="align-text-bottom"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-            <i class="bi bi-house">  </i>
-             Front end
-            </a>
-        
-        </ul>
-      </div>
-    </nav>
-
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">CsArt</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
+            aria-label="Search">
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="<?=ROOT?>/logout">Sign out</a>
+            </div>
         </div>
-      </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3 sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?=ROOT?>/admin">
+                                <i class="bi bi-speedometer"> </i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="<?=ROOT?>/admin/users">
+                                <i class="bi bi-person"> </i>
+                                Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="<?=ROOT?>/admin/categories">
+                                <i class="bi bi-list-stars"> </i>
+                                Categories
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="<?=ROOT?>/admin/posts">
+                                <i class="bi bi-stickies-fill"> </i>
+                                Posts
+                            </a>
+                        </li>
 
 
-      Contents
-      </div>
-    </main>
-  </div>
-</div>
+                    </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Others</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle" class="align-text-bottom"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?=ROOT?>">
+                                <i class="bi bi-house"> </i>
+                                Front end
+                            </a>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar" class="align-text-bottom"></span>
+                            This week
+                        </button>
+                    </div>
+                </div>
+
+                <?php  
+
+                  require_once  $filename;
+              
+                  ?>
+
+        </div>
+        </main>
+    </div>
+    </div>
 
 
-    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-    <script scr="assets/js/dashboard.js"></script>
-    </body>
+    <script src="<?=ROOT?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>
