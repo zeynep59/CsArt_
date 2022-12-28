@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  background-image:url("../images/1.jpeg") ;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
 .form-signin {
   max-width: 330px;
   padding: 15px;
-  background-color: blueviolet;
+  background-color: #f2e9e4;
 }
 
 .form-signin .form-floating:focus-within {
