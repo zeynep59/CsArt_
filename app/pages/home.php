@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <title>Home - CsArt</title>
+  <title>Home - <?=APP_NAME?> </title>
 
 
 
@@ -229,9 +229,9 @@
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
           <li class="nav-item mb-2"><a href="<?php echo ROOT?>/login" class="nav-link p-0 text-muted">Login</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="<?php echo ROOT?>/signup" class="nav-link p-0 text-muted">Signup</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          <li class="nav-item mb-2"><a href="<?php echo ROOT?>/about" class="nav-link p-0 text-muted">About</a></li>
         </ul>
       </div>
 
