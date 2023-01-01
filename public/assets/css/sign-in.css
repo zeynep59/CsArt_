@@ -1,7 +1,7 @@
 html,
 body {
   height: 100%;
-  background-image:url("../images/1.jpeg") ;
+  background-image:url("../images/c.jpg") ;
 }
 
 body {
@@ -10,7 +10,6 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
-  
 }
 
 .form-signin {
@@ -33,4 +32,4 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
+}   

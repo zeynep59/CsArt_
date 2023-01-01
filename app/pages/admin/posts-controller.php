@@ -63,15 +63,16 @@ if($action == 'add')
         $data['title']        = $_POST['title'];
         $data['content']      = $new_content;
         $data['category_id']  = $_POST['category_id'];
+        $data['artist']       = $_POST['artist'];
         $data['slug']         = $slug;
         $data['user_id']      = user('id');
 
-        $query = "insert into posts (title,content,slug,category_id,user_id) values (:title,:content,:slug,:category_id,:user_id)";
+        $query = "insert into posts (title,content,slug,category_id,artist,user_id) values (:title,:content,:slug,:category_id,:artist,:user_id)";
         
         if(!empty($destination))
         {
           $data['image']     = $destination;
-          $query = "insert into posts (title,content,slug,category_id,user_id,image) values (:title,:content,:slug,:category_id,:user_id,:image)";
+          $query = "insert into posts (title,content,slug,category_id,artist,user_id,image) values (:title,:content,:slug,:category_id,:artist,:user_id,:image)";
         }
 
         query($query, $data);
@@ -140,6 +141,7 @@ if($action == 'edit')
           $data['title']    = $_POST['title'];
           $data['content']  = $new_content;
           $data['category_id']   = $_POST['category_id'];
+          $data['artist'] = $_POST['artist'];
           $data['id']       = $id;
 
           $image_str        = "";
@@ -150,7 +152,7 @@ if($action == 'edit')
               $data['image']       = $destination;
             }
           
-            $query = "update posts set title = :title, content = :content, $image_str category_id = :category_id where id = :id limit 1";
+            $query = "update posts set title = :title, content = :content, $image_str category_id = :category_id artist= :artist where id = :id limit 1";
 
           query($query, $data);
           redirect('admin/posts');
