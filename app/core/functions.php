@@ -175,11 +175,20 @@ function user($key = '')
 	return '';
 }
 
+
+
 function logged_in()
 {
 	if(!empty($_SESSION['USER']))
 		return true;
 
+	return false;
+}
+
+
+function is_admin(){
+	if (user('role') == 'admin')
+		return true;
 	return false;
 }
 
@@ -253,7 +262,8 @@ function create_tables()
 		role varchar(10) not null,
 
 		key username (username),
-		key email (email)
+		key email (email),
+		key image (image)
 
 	)";
 	$stm = $con->prepare($query);
@@ -281,20 +291,81 @@ function create_tables()
 		user_id int,
 		category_id int,
 		title varchar(100) not null,
+		artist varchar(60) not null,
 		content text null,
 		image varchar(1024) null,
+		year  int null,
 		date datetime default current_timestamp,
 		slug varchar(100) not null,
 
 		key user_id (user_id),
 		key category_id (category_id),
 		key title (title),
+		key artist (artist),
+		key year (year),
 		key slug (slug),
 		key date (date)
 
 	)";
 	$stm = $con->prepare($query);
 	$stm->execute();
+
+	/** Artists **/
+	$query = "create table if not exists artists(
+		id_artist int primary key auto_increment,
+		post_id int,
+		name varchar(60) not null,
+		info text null,
+		image varchar(1024) null,
+		year int null,
+		slug varchar(100) not null,
+
+
+		key post_id (post_id),
+		key slug (slug),
+		key year (year),
+		key name (name),
+		key info (info)
+
+		
+	)";
+	$stm = $con->prepare($query);
+	$stm->execute();
+
+
+	$query = "create table if not exists saveds(
+		id int primary key auto_increment,
+		post_id int,
+		user_id int,
+		slug varchar(100) not null,
+
+		key slug (slug),
+		key post_id (post_id),
+		key user_id (user_id)
+
+		
+	)";
+	$stm = $con->prepare($query);
+	$stm->execute();
+
+
+	$query = "create table if not exists comments(
+		id int primary key auto_increment,
+		post_id int,
+		user_id int,
+		comment text,
+		slug varchar(100) not null,
+
+		key slug (slug),
+		key post_id (post_id),
+		key user_id (user_id),
+		key comment (comment)
+
+		
+	)";
+	$stm = $con->prepare($query);
+	$stm->execute();
+
 
 
 }

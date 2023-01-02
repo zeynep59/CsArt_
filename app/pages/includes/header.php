@@ -34,6 +34,8 @@
           <li><a href="<?=ROOT?>/blog" class="nav-link px-2  <?=$url[0] =='blog' ? 'link-primary':'link-dark'?>">Blog</a></li>
           <li><a href="<?=ROOT?>/search" class="nav-link px-2  <?=$url[0] =='search' ? 'link-primary':'link-dark'?>">Search</a></li>
           <li><a href="<?=ROOT?>/contact" class="nav-link px-2  <?=$url[0] =='contact' ? 'link-primary':'link-dark'?>">Contact</a></li>
+          <li><a href="<?=ROOT?>/artists" class="nav-link px-2  <?=$url[0] =='artists' ? 'link-primary':'link-dark'?>">Artists</a></li>
+
           <li>
             <span class="nav-link px-2 link-dark dropdown text-end">
               <a href="#" class="d-block <?=$url[0] =='category' ? 'link-primary':'link-dark'?> text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,9 +74,12 @@
           </a>
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="#">Hi, <?=user('username')?></a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="<?=ROOT?>/admin">Admin</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="<?=ROOT?>/profile">Profile</a></li>
+            <?php if(is_admin()):?>
+            <li>
+              <a class="dropdown-item" href="<?=ROOT?>/admin">Admin</a>
+            </li>
+            <?php endif;?>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="<?=ROOT?>/logout">Sign out</a></li>
           </ul>

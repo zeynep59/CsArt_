@@ -4,10 +4,10 @@
 <div class="mx-auto col-md-10">
     <h3 class="mx-4">Contact Informations</h3>
 
-      <div class="row my-2 justify-content-center">
+      <div class="row my-2 mb-9 justify-content-center ">
         <table>
              <tr>
-                <td><h4>Ayşe Ceren Yaman</h4>
+                <td><h4 color-white>Ayşe Ceren Yaman</h4>
                 <td><h4>   Zeynep Öztürk</h4>
             </tr>
         </table>

@@ -61,18 +61,19 @@ if($action == 'add')
         //save to database
         $data = [];
         $data['title']        = $_POST['title'];
+        $data['artist']        = $_POST['artist'];
+        $data['year']        = $_POST['year'];
         $data['content']      = $new_content;
         $data['category_id']  = $_POST['category_id'];
-        $data['artist']       = $_POST['artist'];
         $data['slug']         = $slug;
         $data['user_id']      = user('id');
 
-        $query = "insert into posts (title,content,slug,category_id,artist,user_id) values (:title,:content,:slug,:category_id,:artist,:user_id)";
+        $query = "insert into posts (title,artist,year,content,slug,category_id,user_id) values (:title,:artist,:year,:content,:slug,:category_id,:user_id)";
         
         if(!empty($destination))
         {
           $data['image']     = $destination;
-          $query = "insert into posts (title,content,slug,category_id,artist,user_id,image) values (:title,:content,:slug,:category_id,:artist,:user_id,:image)";
+          $query = "insert into posts (title,artist,year,content,slug,category_id,user_id,image) values (:title,:artist,:year,:content,:slug,:category_id,:user_id,:image)";
         }
 
         query($query, $data);
@@ -100,6 +101,14 @@ if($action == 'edit')
         if(empty($_POST['title']))
         {
           $errors['title'] = "A title is required";
+        }
+        if(empty($_POST['artist']))
+        {
+          $errors['artist'] = "A artist is required";
+        }
+        if(empty($_POST['year']))
+        {
+          $errors['year'] = "A year is required";
         }
 
         if(empty($_POST['category_id']))
@@ -139,9 +148,10 @@ if($action == 'edit')
           //save to database
           $data = [];
           $data['title']    = $_POST['title'];
+          $data['artist']    = $_POST['artist'];
+          $data['year']    = $_POST['year'];
           $data['content']  = $new_content;
           $data['category_id']   = $_POST['category_id'];
-          $data['artist'] = $_POST['artist'];
           $data['id']       = $id;
 
           $image_str        = "";
@@ -152,7 +162,7 @@ if($action == 'edit')
               $data['image']       = $destination;
             }
           
-            $query = "update posts set title = :title, content = :content, $image_str category_id = :category_id artist= :artist where id = :id limit 1";
+            $query = "update posts set title = :title, artist = :artist,year = :year, content = :content, $image_str category_id = :category_id  where id = :id limit 1";
 
           query($query, $data);
           redirect('admin/posts');

@@ -39,6 +39,24 @@
       <div class="text-danger"><?=$errors['title']?></div>
       <?php endif;?>
 
+      <div class="form-floating">
+      <input value="<?=old_value('artist')?>" name="artist" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
+      <label for="floatingInput">Artist</label>
+    </div>
+      <?php if(!empty($errors['artist'])):?>
+      <div class="text-danger"><?=$errors['artist']?></div>
+      <?php endif;?>
+
+      <div class="form-floating">
+      <input value="<?=old_value('year')?>" name="year" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
+      <label for="floatingInput">Year</label>
+    </div>
+      <?php if(!empty($errors['year'])):?>
+      <div class="text-danger"><?=$errors['year']?></div>
+      <?php endif;?>
+
+
+
     <div class="">
       <textarea id="summernote" rows="8" name="content" id="floatingInput" placeholder="Post content" type="content" class="form-control"><?=old_value('content')?></textarea>
     </div>
@@ -121,11 +139,28 @@
 
         <div class="form-floating">
           <input value="<?=old_value('title', $row['title'])?>" name="title" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
-          <label for="floatingInput">Username</label>
+          <label for="floatingInput">Title</label>
         </div>
           <?php if(!empty($errors['title'])):?>
           <div class="text-danger"><?=$errors['title']?></div>
           <?php endif;?>
+
+          <div class="form-floating">
+          <input value="<?=old_value('artist', $row['artist'])?>" name="artist" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
+          <label for="floatingInput">Artist</label>
+        </div>
+          <?php if(!empty($errors['artist'])):?>
+          <div class="text-danger"><?=$errors['artist']?></div>
+          <?php endif;?>
+
+          <div class="form-floating">
+          <input value="<?=old_value('year', $row['year'])?>" name="year" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
+          <label for="floatingInput">Year</label>
+        </div>
+          <?php if(!empty($errors['year'])):?>
+          <div class="text-danger"><?=$errors['year']?></div>
+          <?php endif;?>
+
 
         <div class="">
       <textarea id="summernote" rows="8" name="content" id="floatingInput" placeholder="Post content" type="content" class="form-control"><?=old_value('content',add_root_to_images($row['content']))?></textarea>
@@ -198,6 +233,20 @@
           <div class="text-danger"><?=$errors['title']?></div>
           <?php endif;?>
 
+          <div class="form-floating">
+          <div class="form-control mb-2" ><?=old_value('artist', $row['artist'])?></div>
+        </div>
+          <?php if(!empty($errors['artist'])):?>
+          <div class="text-danger"><?=$errors['artist']?></div>
+          <?php endif;?>
+
+          <div class="form-floating">
+          <div class="form-control mb-2" ><?=old_value('year', $row['year'])?></div>
+        </div>
+          <?php if(!empty($errors['year'])):?>
+          <div class="text-danger"><?=$errors['year']?></div>
+          <?php endif;?>
+
         <div class="form-floating">
           <div class="form-control mb-2" ><?=old_value('slug', $row['slug'])?></div>
         </div>
@@ -209,6 +258,7 @@
         <a href="<?=ROOT?>/admin/posts">
             <button class="mt-4 btn btn-lg btn-primary" type="button">Back</button>
         </a>
+        
         <button class="mt-4 btn btn-lg btn-danger  float-end" type="submit">Delete</button>
     <?php else:?>
 
@@ -233,7 +283,9 @@
     <tr>
         <th>#</th>
         <th>Title</th>
-        <th>Slug</th>
+        <th>Artist</th>
+        <th>Year</th>
+        <th>slug</th>
         <th>Image</th>
         <th>Date</th>
         <th>Action</th>
@@ -251,6 +303,8 @@
         <tr>
             <td><?=$row['id']?></td>
             <td><?=esc($row['title'])?></td>
+            <td><?=esc($row['artist'])?></td>
+            <td><?=esc($row['year'])?></td>
             <td><?=$row['slug']?></td>
             <td>
                 <img src="<?=get_image($row['image'])?>" style="width: 100px;height: 100px;object-fit: cover;">

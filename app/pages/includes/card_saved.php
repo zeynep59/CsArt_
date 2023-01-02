@@ -19,11 +19,5 @@
       </a>
     </div>
 
-    <div>
-      <button >
-        Save
-      </button>
-    </div>
-
   </div>
 </div>

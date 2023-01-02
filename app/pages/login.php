@@ -15,7 +15,7 @@ if(!empty($_POST))
     {
       //grant access
       authenticate($row[0]);
-      redirect('admin');
+      redirect('home');
 
     }else{
       $errors['email'] = "wrong email or password";

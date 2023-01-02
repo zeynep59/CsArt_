@@ -24,6 +24,11 @@
   if($section == 'categories')
   {
     require_once "../app/pages/admin/categories-controller.php";
+  }
+  else
+  if($section == 'dashboard')
+  {
+    require_once "../app/pages/admin/dashboard.php";
   }else
   if($section == 'posts')
   {
@@ -123,7 +128,7 @@
         <ul class="nav flex-column">
           
           <li class="nav-item">
-            <a class="nav-link <?=$section =='dashboard' ? 'active':''?>" aria-current="page" href="<?=ROOT?>/admin">
+            <a class="nav-link <?=$section =='dashboard' ? 'active':''?>" aria-current="page" href="<?=ROOT?>/admin/dashboard">
               <i class="bi bi-speedometer"></i> 
               Dashboard
             </a>
@@ -159,7 +164,7 @@
           <li class="nav-item">
             <a class="nav-link" href="<?=ROOT?>">
               <i class="bi bi-house"></i>
-              Front end
+               Home
             </a>
           </li>
 
