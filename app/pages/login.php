@@ -1,5 +1,4 @@
 <?php
-
 if(!empty($_POST))
 {
   //validate
@@ -15,6 +14,10 @@ if(!empty($_POST))
     {
       //grant access
       authenticate($row[0]);
+      $user_id = user("id");
+      $date = date("M-Y");
+     /* $query2 = "insert into logins (user_id,date) values ($user_id,$date)";
+      query($query2);*/
       redirect('home');
 
     }else{

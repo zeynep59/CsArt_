@@ -1,7 +1,7 @@
 <div class="col-md-6">
   <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
-      <strong class="d-inline-block mb-2 text-primary"><?=esc($row['category'] ?? 'Unknown')?></strong>
+      <strong class="d-inline-block mb-2 text-primary"><?=esc($row['Category'] ?? '')?></strong>
       
       <a href="<?=ROOT?>/post/<?=$row['slug']?>">
         <h3 class="mb-0"><?=esc($row['title'])?></h3>

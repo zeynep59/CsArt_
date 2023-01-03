@@ -43,7 +43,43 @@
 
       </div>
 
+      <form method="post">
+        <input  class="btn btn-info" type="submit" name="save"
+                value="save post"/>
+                <br/>
+      <textarea placeholder="write comment" value="<?=$_GET['com'] ?? ''?>" class="form-control mb-2 my-4" id="exampleFormControlTextarea1" rows="3" name="comment_area"></textarea>
+      <input  class="btn btn-success d-flex" type="submit" name="comments"
+                value="submit comment"/>
+     
+    </form>
 
+    <?php
+        if(isset($_POST['save'])) {
+
+          $user_id = user("id");
+          $post_id = esc($row['id']);
+          $data = [];
+          $data['user_id'] = user("id");
+          $data['post_id'] = $post_id;
+          $query = "insert into saveds (user_id, post_id) values (:user_id,:post_id)";
+          
+          query($query, $data);
+                      }
+        if(isset($_POST['comments'])) {
+          $find = $_GET['com'] ?? null;
+          $user_id = user("id");
+          $post_id = esc($row['id']);
+          $data = [];
+          $data['user_id'] = user("id");
+          $data['post_id'] = $post_id;
+          $data['comment'] = $find;
+          $query = "insert into comments (user_id, post_id, comment) values (:user_id,:post_id, :com)";
+          query($query, $data);
+
+        }
+    ?>
+
+   
 </div>
 <?php include '../app/pages/includes/footer.php'; ?>
 

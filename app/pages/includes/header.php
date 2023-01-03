@@ -69,6 +69,10 @@
         </form>
 
         <?php if(logged_in()):?>
+          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+           
+          <img class="bi me-2" src="<?=ROOT?>/assets/images/siluet.png"  width="40" height="52" style="object-fit:cover;">
+        </a>
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           </a>

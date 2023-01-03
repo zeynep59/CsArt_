@@ -1,5 +1,8 @@
 <?php include '../app/pages/includes/header.php'; ?>
 
+<?php
+  $action   = $url[2] ?? 'view';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,21 +46,32 @@
               <i class="fab fa-facebook"></i>
               <i class="fab fa-dribbble"></i>
             </ul>
-          </div>
-        </div>
-        <div class="right__col">
-          <nav>
-            <ul>
-              <li><a href="">Saved Posts</a></li>
-              <li><a href="">Comments</a></li>
-            </ul>
-          </nav>
+            </div>
 
-          <?php
-          include '../app/pages/profile/saveds.php';?>
 
-        </div>
-      </div>
+            </div>
     </div>
+          
+     
+    <form method="post">
+        <input  class="btn btn-link" type="submit" name="saveds"
+                value="saveds"/>
+         
+        <input  class="btn btn-link" type="submit" name="comments"
+                value="comments"/>
+    </form>
+
+    <?php
+        if(isset($_POST['saveds'])) {
+          include '../app/pages/profile/saveds.php';
+                }
+        if(isset($_POST['comments'])) {
+          include '../app/pages/profile/comments.php';     
+           }
+    ?>
+    
+        </div>
   </body>
 </html>
+
+<?php include '../app/pages/includes/footer.php'; ?>

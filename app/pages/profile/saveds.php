@@ -1,5 +1,4 @@
 <div class="mx-auto col-md-10">
-    <h3 class="mx-4 ">saved posts</h3>
 
       <div class="row my-2 justify-content-center">
 

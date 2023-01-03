@@ -3,17 +3,17 @@
     <div class="col p-4 d-flex flex-column position-static">
       
       <a href="<?=ROOT?>/artist/<?=$row['slug']?>">
-        <h3 class="mb-0"><?=esc($row['name'])?></h3>
+        <h5 class="mb-0"><?=esc($row['name'])?></h5>
       </a>
 
       <a href="<?=ROOT?>/artist/<?=$row['slug']?>" class="stretched-link">Continue reading..</a>
-      <h6 class="mb-0"><?=esc($row['year'])?></h6>
+      <a class="mb-0"><?=esc($row['year'])?></a>
 
     </div>
 
     <div class="col-lg-5 col-12 d-lg-block">
       <a href="<?=ROOT?>/artist/<?=$row['slug']?>">
-        <img class="bd-placeholder-img w-100" width="200" height="250" style="object-fit:cover;" src="<?=get_image($row['image'])?>">
+        <img class="bd-placeholder-img w-100" width="200" height="250" style="object-fit:scale-down;" src="<?=get_image($row['image'])?>">
       </a>
     </div>
 

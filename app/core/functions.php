@@ -366,6 +366,19 @@ function create_tables()
 	$stm = $con->prepare($query);
 	$stm->execute();
 
+	$query = "create table if not exists logins(
+		id int primary key auto_increment,
+		user_id int,
+		date varchar(40),
+
+		key user_id (user_id),
+		key date (date)
+
+		
+	)";
+	$stm = $con->prepare($query);
+	$stm->execute();
+
 
 
 }
@@ -392,7 +405,6 @@ function resize_image($filename, $max_size = 1000)
 				break;
 			default:
 				return;
-				break;
 		}
 
 		$src_width 	= imagesx($image);
@@ -432,7 +444,7 @@ function resize_image($filename, $max_size = 1000)
 				imagepng($dst_image, $filename, 90);
 				break;
 			case 'image/gif':
-				imagegif($dst_image, $filename, 90);
+				imagegif($dst_image, $filename);
 				break;
 			case 'image/webp':
 				imagewebp($dst_image, $filename, 90);
