@@ -1,5 +1,13 @@
-
-    <?php include '../app/pages/includes/header.php'; ?>
+<?php
+ $user_id = user("id");
+ $date = date("M-Y");
+ $data['user_id'] = $user_id;
+ $data['date'] = $date;
+ $query2 = "insert into logins (user_id,date) values (:user_id,:date)";
+ query($query2, $data);
+ ?>
+   
+   <?php include '../app/pages/includes/header.php'; ?>
 
 <h3 class="mx-4">Featured</h3>
 

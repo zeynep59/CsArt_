@@ -47,7 +47,7 @@
         <input  class="btn btn-info" type="submit" name="save"
                 value="save post"/>
                 <br/>
-      <textarea placeholder="write comment" value="<?=$_GET['com'] ?? ''?>" class="form-control mb-2 my-4" id="exampleFormControlTextarea1" rows="3" name="comment_area"></textarea>
+      <textarea placeholder="write comment" value="<?=$_GET['com'] ?? ''?>" class="form-control mb-2 my-4" id="com" rows="3" name="com"></textarea>
       <input  class="btn btn-success d-flex" type="submit" name="comments"
                 value="submit comment"/>
      
@@ -66,14 +66,14 @@
           query($query, $data);
                       }
         if(isset($_POST['comments'])) {
-          $find = $_GET['com'] ?? null;
+          $find = $_POST['com'] ?? "No comment!";
           $user_id = user("id");
           $post_id = esc($row['id']);
           $data = [];
           $data['user_id'] = user("id");
           $data['post_id'] = $post_id;
           $data['comment'] = $find;
-          $query = "insert into comments (user_id, post_id, comment) values (:user_id,:post_id, :com)";
+          $query = "insert into comments (user_id, post_id, comment) values (:user_id,:post_id, :comment)";
           query($query, $data);
 
         }
