@@ -9,6 +9,7 @@
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="<?=ROOT?>/" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="<?=ROOT?>/login" class="nav-link px-2 text-muted">Login</a></li>
+      <li class="nav-item"><a href="<?=ROOT?>/signup" class="nav-link px-2 text-muted">Signup</a></li>
       <li class="nav-item"><a href="<?=ROOT?>/artists" class="nav-link px-2 text-muted">Artists</a></li>
       <li class="nav-item"><a href="<?=ROOT?>/blog" class="nav-link px-2 text-muted">Blog</a></li>
       <li class="nav-item"><a href="<?=ROOT?>/contact" class="nav-link px-2 text-muted">About</a></li>

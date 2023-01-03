@@ -1,7 +1,7 @@
 <div class="mx-auto col-md-10">
 
       <div class="row my-2 justify-content-center">
-
+        <h6 class="header mx-4">Saved Posts</h6>
         <?php  
 
           $limit = 10;

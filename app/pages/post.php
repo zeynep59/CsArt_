@@ -1,9 +1,8 @@
-
 <?php include '../app/pages/includes/header.php'; ?>
 
 <div class="mx-auto col-md-10">
 
-      <div class="row my-2 justify-content-center">
+    <div class="row my-2 justify-content-center">
 
         <?php  
  
@@ -18,39 +17,39 @@
 
           if(!empty($row))
           { ?>
-            
-            <div class="col-md-12">
+
+        <div class="col-md-12">
             <div class="g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-              <div class="col-12 d-lg-block">
-                <img class="bd-placeholder-img w-100" width="100%" style="object-fit:cover;" src="<?=get_image($row['image'])?>">
-              </div>
-              <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary"><?=esc($row['category'] ?? 'Unknown')?></strong>
-                <h3 class="mb-0"><?=esc($row['title'])?></h3>
-                <div class="mb-1 text-muted"><?=date("jS M, Y",strtotime($row['date']))?></div>
-                <p class="card-text mb-auto"><?=nl2br(add_root_to_images($row['content']))?></p>
-              </div>
+                <div class="col-12 d-lg-block">
+                    <img class="bd-placeholder-img w-100" width="100%" style="object-fit:cover;"
+                        src="<?=get_image($row['image'])?>">
+                </div>
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary"><?=esc($row['category'] ?? 'Unknown')?></strong>
+                    <h3 class="mb-0"><?=esc($row['title'])?></h3>
+                    <div class="mb-1 text-muted"><?=date("jS M, Y",strtotime($row['date']))?></div>
+                    <p class="card-text mb-auto"><?=nl2br(add_root_to_images($row['content']))?></p>
+                </div>
 
             </div>
-          </div>
+        </div>
 
-          <?php 
+        <?php 
           }else{
             echo "No items found!";
           }
 
         ?>
 
-      </div>
+    </div>
 
-      <form method="post">
-        <input  class="btn btn-info" type="submit" name="save"
-                value="save post"/>
-                <br/>
-      <textarea placeholder="write comment" value="<?=$_GET['com'] ?? ''?>" class="form-control mb-2 my-4" id="com" rows="3" name="com"></textarea>
-      <input  class="btn btn-success d-flex" type="submit" name="comments"
-                value="submit comment"/>
-     
+    <form method="post">
+        <input class="btn btn-info" type="submit" name="save" value="save post" />
+        <br />
+        <textarea placeholder="write comment" value="<?=$_GET['com'] ?? ''?>" class="form-control mb-2 my-4" id="com"
+            rows="3" name="com"></textarea>
+        <input class="btn btn-success d-flex" type="submit" name="comments" value="submit comment" />
+
     </form>
 
     <?php
@@ -78,8 +77,28 @@
 
         }
     ?>
+    <br />
 
-   
+    <h5>Comments</h5>
+    <br />
+    <?php  
+
+$limit = 100;
+$offset = ($PAGE['page_number'] - 1) * $limit;
+$post_id = esc($row['id']);
+$query = "select users.*, comments.comment from users join comments on comments.user_id = users.id where comments.post_id = $post_id order by id desc limit $limit offset $offset";
+$rows = query($query);
+if($rows)
+{
+  foreach ($rows as $row) {
+    include '../app/pages/includes/comment_card.php';
+  }
+
+}else{
+  echo "No items found!";
+}
+
+?>
+
 </div>
 <?php include '../app/pages/includes/footer.php'; ?>
-

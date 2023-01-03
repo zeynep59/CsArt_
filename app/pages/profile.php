@@ -5,6 +5,14 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<style type="text/css" >
+        form{
+          margin-left: 10rem;
+        }
+        input{
+          width: 40rem ;
+        }
+      </style>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,38 +37,25 @@
           </div>
           <h2><?=user('username')?></h2>
 
-          <ul class="about">
-            <li><span>10</span>Saved images</li>
-          </ul>
+        
 
-          <div class="Bio">
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam
-              erat volutpat. Morbi imperdiet, mauris ac auctor dictum, nisl
-              ligula egestas nulla.
-            </p>
-
-            <ul>
-              <li><i class="fab fa-twitter"></i></li>
-              <i class="fab fa-pinterest"></i>
-              <i class="fab fa-facebook"></i>
-              <i class="fab fa-dribbble"></i>
-            </ul>
-            </div>
+          
 
 
             </div>
     </div>
-          
+   
      
-    <form method="post">
-        <input  class="btn btn-link" type="submit" name="saveds"
+    <form class="mx-14 mb-4" method="post">
+        <input  class="btn btn-info" type="submit" name="saveds"
                 value="saveds"/>
          
-        <input  class="btn btn-link" type="submit" name="comments"
+        <input  class="btn btn-secondary" type="submit" name="comments"
                 value="comments"/>
     </form>
 
+    <br/>
+   
     <?php
         if(isset($_POST['saveds'])) {
           include '../app/pages/profile/saveds.php';
